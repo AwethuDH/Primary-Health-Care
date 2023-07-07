@@ -1,0 +1,22 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<h1 style="color:white">@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+<p style="color:white">
+    Thank you for registering with e-Nomphilo Primary Health Care! We are excited to have you join our community <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+</p>
+    }
+    else
+    {
+<p style="color:lightgray">
+        Please check your email to confirm your account.
+</p>
+    }
+}
+

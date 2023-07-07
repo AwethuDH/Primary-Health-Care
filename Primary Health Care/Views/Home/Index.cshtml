@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Authentication;
+@using Microsoft.Extensions.DependencyInjection;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+
+<div class="center-container">
+    <h1 style="color: white; text-align: center;">Welcome to e-Nomphilo Primary Health Care</h1>
+
+    <div class="department-container">
+        <a href="vaccination.html" class="department" data-auth="true">
+            <i class="fas fa-syringe department-icon" style="color: rgb(245, 12, 12);"></i>
+            <div class="department-title">Vaccination</div>
+            <div class="department-info">
+                Provides immunization services for various diseases.
+            </div>
+        </a>
+        <a href="chronic-medication.html" class="department" >
+            <i class="fas fa-prescription-bottle department-icon" style="color: rgb(70, 245, 70);"></i>
+            <div class="department-title">Chronic Medication</div>
+            <div class="department-info">
+                Manages and dispenses medication for chronic conditions.
+            </div>
+        </a>
+        <a href="counseling.html" class="department">
+            <i class="fas fa-heart department-icon" style="color: rgb(70, 245, 70);"></i>
+            <div class="department-title">Counseling and Mental Wellness</div>
+            <div class="department-info">
+                Offers counseling and support for mental health issues.
+            </div>
+        </a>
+        <a href="family-planning.html" class="department" >
+            <i class="fas fa-child department-icon"></i>
+            <div class="department-title">Family Planning</div>
+            <div class="department-info">
+                Provides contraception and reproductive health services.
+            </div>
+        </a>
+        <a href="tests-labs.html" class="department" >
+            <i class="fas fa-vial department-icon" style="color: rgb(245, 12, 245);"></i>
+            <div class="department-title">Tests and Labs (Pathology)</div>
+            <div class="department-info">
+                Conducts diagnostic tests and lab services.
+            </div>
+        </a>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var departmentLinks = document.querySelectorAll(".department[data-auth='true']");
+        departmentLinks.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                if (!isUserAuthenticated()) {
+                    event.preventDefault();
+                    alert("Please login to access this department.");
+                }
+            });
+        });
+    });
+
+     function isUserAuthenticated() {
+        // Check if the user is authenticated based on your authentication mechanism.
+        // This is just an example implementation, please customize it according to your authentication logic.
+
+        // Assuming you have an authentication token stored in a cookie, check if the cookie exists.
+
+        var authToken = getCookie("authToken");
+
+        return authToken !== null && authToken !== "";
+    }
+
+    function getCookie(name) {
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+
+            if (cookie.startsWith(name + "=")) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+
+        return null;
+    }
+</script>
